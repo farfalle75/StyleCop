@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patterns xmlns="urn:schemas-jetbrains-com:member-reordering-patterns">
+	<TypePattern DisplayName="COM interfaces or structs">
+		<TypePattern.Match>
+			<Or>
+				<And>
+					<Kind Is="Interface" />
+					<Or>
+						<HasAttribute Name="System.Runtime.InteropServices.InterfaceTypeAttribute" />
+						<HasAttribute Name="System.Runtime.InteropServices.ComImport" />
+					</Or>
+				</And>
+				<Kind Is="Struct" />
+			</Or>
+		</TypePattern.Match>
+	</TypePattern>
+	<TypePattern DisplayName="NUnit Test Fixtures" RemoveRegions="All">
+		<TypePattern.Match>
+			<And>
+				<Kind Is="Class" />
+				<HasAttribute Name="NUnit.Framework.TestFixtureAttribute" Inherited="True" />
+			</And>
+		</TypePattern.Match>
+		<Entry DisplayName="Setup/Teardown Methods">
+			<Entry.Match>
+				<And>
+					<Kind Is="Method" />
+					<Or>
+						<HasAttribute Name="NUnit.Framework.SetUpAttribute" Inherited="True" />
+						<HasAttribute Name="NUnit.Framework.TearDownAttribute" Inherited="True" />
+						<HasAttribute Name="NUnit.Framework.FixtureSetUpAttribute" Inherited="True" />
+						<HasAttribute Name="NUnit.Framework.FixtureTearDownAttribute" Inherited="True" />
+					</Or>
+				</And>
+			</Entry.Match>
+		</Entry>
+		<Entry DisplayName="All other members" />
+		<Entry DisplayName="Test Methods" Priority="100">
+			<Entry.Match>
+				<And>
+					<Kind Is="Method" />
+					<HasAttribute Name="NUnit.Framework.TestAttribute" />
+				</And>
+			</Entry.Match>
+			<Entry.SortBy>
+				<Name />
+			</Entry.SortBy>
+		</Entry>
+	</TypePattern>
+	<TypePattern DisplayName="Default Pattern (StyleCop with regions)" RemoveRegions="AllExceptGenerated">
+		<Entry DisplayName="Public Enums" Priority="100">
+			<Entry.Match>
+				<And>
+					<Access Is="Public" />
+					<Kind Is="Enum" />
+				</And>
+			</Entry.Match>
+			<Entry.SortBy>
+				<Name />
+			</Entry.SortBy>
+		</Entry>
+		<Region Name="Static Fields and Constants">
+			<Entry DisplayName="Static Fields and Constants">
+				<Entry.Match>
+					<Or>
+						<Kind Is="Constant" />
+						<And>
+							<Kind Is="Field" />
+							<Static />
+						</And>
+					</Or>
+				</Entry.Match>
+				<Entry.SortBy>
+					<Kind Order="Constant Field" />
+				</Entry.SortBy>
+			</Entry>
+		</Region>
+		<Region Name="Fields">
+			<Entry DisplayName="Fields">
+				<Entry.Match>
+					<And>
+						<Kind Is="Field" />
+						<Not>
+							<Static />
+						</Not>
+					</And>
+				</Entry.Match>
+				<Entry.SortBy>
+					<Readonly />
+					<Name />
+				</Entry.SortBy>
+			</Entry>
+		</Region>
+		<Region Name="Constructors and Finalizers">
+			<Entry DisplayName="Constructors">
+				<Entry.Match>
+					<Kind Is="Constructor" />
+				</Entry.Match>
+				<Entry.SortBy>
+					<Static />
+				</Entry.SortBy>
+			</Entry>
+			<Entry DisplayName="Finalizers">
+				<Entry.Match>
+					<Kind Is="Destructor" />
+				</Entry.Match>
+				<Entry.SortBy>
+					<Static />
+				</Entry.SortBy>
+			</Entry>
+		</Region>
+		<Region Name="Public Delegates">
+			<Entry DisplayName="Public Delegates" Priority="100">
+				<Entry.Match>
+					<And>
+						<Access Is="Public" />
+						<Kind Is="Delegate" />
+					</And>
+				</Entry.Match>
+				<Entry.SortBy>
+					<Name />
+				</Entry.SortBy>
+			</Entry>
+		</Region>
+		<Region Name="Public Events">
+			<Entry DisplayName="Public Events">
+				<Entry.Match>
+					<And>
+						<Kind Is="Event" />
+						<Access Is="Public" />
+					</And>
+				</Entry.Match>
+			</Entry>
+		</Region>
+		<Region Name="Events">
+			<Entry DisplayName="Protected Events">
+				<Entry.Match>
+					<And>
+						<Kind Is="Event" />
+						<Access Is="Protected" />
+					</And>
+				</Entry.Match>
+			</Entry>
+			<Entry DisplayName="Internal Events">
+				<Entry.Match>
+					<And>
+						<Kind Is="Event" />
+						<Access Is="Internal" />
+					</And>
+				</Entry.Match>
+			</Entry>
+			<Entry DisplayName="Private Events">
+				<Entry.Match>
+					<And>
+						<Kind Is="Event" />
+						<Access Is="Private" />
+					</And>
+				</Entry.Match>
+			</Entry>
+		</Region>
+
+		<Region Name="Public Properties">
+			<Entry DisplayName="Public Properties">
+				<Entry.Match>
+					<And>
+						<Kind Is="Property" />
+						<Access Is="Public" />
+					</And>
+				</Entry.Match>
+			</Entry>
+		</Region>
+		<Region Name="Properties">
+			<Entry DisplayName="Protected Properties">
+				<Entry.Match>
+					<And>
+						<Kind Is="Property" />
+						<Access Is="Protected" />
+					</And>
+				</Entry.Match>
+			</Entry>
+
+			<Entry DisplayName="Internal Properties">
+				<Entry.Match>
+					<And>
+						<Kind Is="Property" />
+						<Access Is="Internal" />
+					</And>
+				</Entry.Match>
+			</Entry>
+
+
+			<Entry DisplayName="Private Properties">
+				<Entry.Match>
+					<And>
+						<Kind Is="Property" />
+						<Access Is="Private" />
+					</And>
+				</Entry.Match>
+			</Entry>
+		</Region>
+		<Region Name="Public Indexers">
+			<Entry DisplayName="Public Indexers">
+				<Entry.Match>
+					<And>
+						<Kind Is="Indexer" />
+						<Access Is="Public" />
+					</And>
+				</Entry.Match>
+			</Entry>
+		</Region>
+		<Region Name="Indexers">
+			<Entry DisplayName="Protected Indexers">
+				<Entry.Match>
+					<And>
+						<Kind Is="Indexer" />
+						<Access Is="Protected" />
+					</And>
+				</Entry.Match>
+			</Entry>
+			<Entry DisplayName="Internal Indexers">
+				<Entry.Match>
+					<And>
+						<Kind Is="Indexer" />
+						<Access Is="Internal" />
+					</And>
+				</Entry.Match>
+			</Entry>
+			<Entry DisplayName="Private Indexers">
+				<Entry.Match>
+					<And>
+						<Kind Is="Indexer" />
+						<Access Is="Private" />
+					</And>
+				</Entry.Match>
+			</Entry>
+		</Region>
+
+		<Region Name="Public Methods and Operators">
+			<Entry DisplayName="Public Methods and Operators" Priority="100">
+				<Entry.Match>
+					<Or>
+						<And>
+							<Access Is="Public" />
+							<Kind Is="Method" />
+						</And>
+						<And>
+							<Access Is="Public" />
+							<Kind Is="Operator" />
+						</And>
+					</Or>
+				</Entry.Match>
+				<Entry.SortBy>
+					<Name />
+				</Entry.SortBy>
+			</Entry>
+		</Region>
+		<Region Name="Methods">
+			<Entry DisplayName="Protected Methods" Priority="100">
+				<Entry.Match>
+					<And>
+						<Access Is="Protected" />
+						<Kind Is="Method" />
+					</And>
+				</Entry.Match>
+				<Entry.SortBy>
+					<Name />
+				</Entry.SortBy>
+			</Entry>
+
+			<Entry DisplayName="Internal Methods" Priority="100">
+				<Entry.Match>
+					<And>
+						<Access Is="Internal" />
+						<Kind Is="Method" />
+					</And>
+				</Entry.Match>
+				<Entry.SortBy>
+					<Name />
+				</Entry.SortBy>
+			</Entry>
+
+			<Entry DisplayName="Private Methods" Priority="100">
+				<Entry.Match>
+					<And>
+						<Access Is="Private" />
+						<Kind Is="Method" />
+					</And>
+				</Entry.Match>
+				<Entry.SortBy>
+					<Name />
+				</Entry.SortBy>
+			</Entry>
+		</Region>
+		<Region Name="Public Enums">
+			<Entry DisplayName="Public Enums">
+				<Entry.Match>
+					<And>
+						<Access Is="Public" />
+						<Kind Is="Enum" />
+					</And>
+				</Entry.Match>
+				<Entry.SortBy>
+					<Name />
+				</Entry.SortBy>
+			</Entry>
+		</Region>
+		<Region Name="Enums">
+			<Entry DisplayName="Protected Enums">
+				<Entry.Match>
+					<And>
+						<Kind Is="Enum" />
+						<Access Is="Protected" />
+					</And>
+				</Entry.Match>
+			</Entry>
+			<Entry DisplayName="Internal Enums">
+				<Entry.Match>
+					<And>
+						<Kind Is="Enum" />
+						<Access Is="Internal" />
+					</And>
+				</Entry.Match>
+			</Entry>
+			<Entry DisplayName="Private Enums">
+				<Entry.Match>
+					<And>
+						<Kind Is="Enum" />
+						<Access Is="Private" />
+					</And>
+				</Entry.Match>
+			</Entry>
+		</Region>
+
+		<Region Name="Nested Types">
+			<Entry DisplayName="Nested Types">
+				<Entry.Match>
+					<Or>
+						<Kind Is="Type" />
+					</Or>
+				</Entry.Match>
+			</Entry>
+		</Region>
+
+		<!-- Update/amend until you find those -->
+		<Region Name="Other members (Please amend layout)">
+			<Entry DisplayName="Other members" />
+		</Region>
+
+	</TypePattern>
+</Patterns>
